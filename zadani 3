@@ -1,0 +1,3 @@
+1. Zjistěte, u které NAME máme největší podíl NaN hodnot ve slopuci PRCP
+2. Spočítejte, v kolik DATE bylo v lokalitě RUZYNĚ TMAX > 30 a zároveň PRCP = 0
+3. Kolikrát byla konkrétní NAME nejdeštivější NAME (na denní bázi)
