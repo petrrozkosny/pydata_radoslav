@@ -1,0 +1,26 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Stazeni .csv souboru publikovaneho na github.com
+url = "https://raw.githubusercontent.com/petrrozkosny/pydata/main/pydata_data.csv"
+df = pd.read_csv(url,delimiter = ';')
+# Filtrovani dataframe (je vysvetleno pozdeji)
+df['DATE']  = pd.to_datetime(df['DATE'])
+
+df['ROK'] = df['DATE'].dt.year
+df_lokality = df.groupby('NAME')['PRCP'].sum()
+df_roky = df.groupby('ROK',as_index=False)['PRCP'].sum()
+
+# Vytvoření grafu pro RUZYNE a TURANY
+fig, ax = plt.subplots(2,1, figsize=(10, 10), sharex=False)
+# sloupcovy graf dle NAME
+ax[0].bar(df_lokality.index, df_lokality.values)
+# rotate x axis for first subplot
+ax[0].tick_params(axis='x', which='major', labelsize=8,rotation=45)
+
+ax[1].plot(df_roky['ROK'], df_roky['PRCP'], marker='o', label='Roky')
+
+plt.tight_layout()
+
+# format osy x
+ax[1].xaxis.set_major_formatter('{:.0f}'.format)
