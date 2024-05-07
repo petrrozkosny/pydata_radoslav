@@ -1,0 +1,9 @@
+import numpy as np
+df_kategorie = df.copy()
+df_kategorie['INTERVAL'] = pd.cut(df_kategorie['PRCP'],bins=[-np.inf,0,5,10,np.inf],labels=['neprselo','prselo malo','prselo akorat','prselo moc'])
+df_kategorie = df_kategorie.groupby(['INTERVAL','YEAR','NAME'],as_index=False)['DATE'].count()
+df_kategorie = df_kategorie.loc[df_kategorie['INTERVAL'] == 'prselo moc']
+df_kategorie_max=  df_kategorie['DATE'].max()
+df_kategorie_max_rok = df_kategorie.loc[df_kategorie['DATE'] == df_kategorie_max]
+df_kategorie_max_rok
+#df_kategorie_max
