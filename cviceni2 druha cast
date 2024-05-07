@@ -1,0 +1,14 @@
+# Buňka pro body 6-8
+
+df.set_index('DATE',inplace=True)
+df_ruzyne = df.loc[df['NAME'] == 'RUZYNE','TMAX']
+df_mosnov = df.loc[df['NAME'] == 'MOSNOV','TMAX']
+
+r =  df_ruzyne.corr(df_mosnov)
+print(r)
+
+df.index = pd.to_datetime(df.index)
+df['ROK'] = df.index.year
+df = df.loc[(df['ROK']==2020)&(df['NAME']=='RUZYNE'),'PRCP']
+df_cumsum = df.cumsum()
+df_cumsum.plot()
